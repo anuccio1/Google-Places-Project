@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NPL Challenge</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<link rel="stylesheet" href="styles/main.css" >
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTRpDyEny9YWTH9nC8qxXUocpIXUSLfZE&libraries=places"></script>
+	<script type="text/javascript" src="vendor/angular.min.js"></script>
+	<script type="text/javascript" src="vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="vendor/lodash.js"></script>
+	<script type="text/javascript" src="scripts/main-built.js"></script>
+</head>
+<body ng-app="placesApp">
+	<div id="pageContainer" ng-controller="mainController">
+		<h1 id="pageTitle">#1 Place Searcher on the Web!</h1>
+
+		<div id="searchBox">
+			<div>
+				<input id="txtSearchPlaces" type="text" placeholder="Search Anywhere in the World! (ex: Paris, Hot Dog, etc.)" ng-model="placesSearchText">
+			</div>
+			<button id="btnSavePlace" ng-click="saveLocation()">Save Result</button>
+			<div>
+				<label id="txtLocationSave" ng-show="locationIsSaved">Location Has Been Saved!</label>
+			</div>
+			<div id="savedResults">
+				<h2 id="txtSavedSearch" class="saved-search-color">Saved Searches:</h2>
+				<div class="saved-search-row" ng-repeat="loc in savedLocations track by loc.id">
+					<label for="goToLocation{{$index}}">{{loc.name}}</label>
+					<input class="btn-old-result" type="button" name="goToLocation{{$index}}" ng-click="loadSavedResult($index)" value="Go!">
+				</div>
+				<div class="saved-search-color" ng-show="savedLocations.length < 1">Your saved results appear here. Go somewhere fun (Paris, maybe?)</div>
+			</div>
+		</div>
+		<div id="mapContainer">
+			<div id="map"></div>
+		</div>
+	
+	</div>
+</body>
+</html>
